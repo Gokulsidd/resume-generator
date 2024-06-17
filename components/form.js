@@ -11,6 +11,7 @@ import { Input } from "./ui/input";
 import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
 import Resume from './resume'; 
+import { backend_base_url } from "@/lib/constants";
 
 const SurveyForm = () => {
   const[formData, setFormData] = useState([])
@@ -19,7 +20,7 @@ const SurveyForm = () => {
 
 
   // useEffect(() => {                               //  for prefill form data 
-  //   axios.get('http://localhost:3002/form')
+  //   axios.get(`${backend_base_url}/form`)
   //   .then((res) => {
   //     setFormData(res.data[0])
   //   })
@@ -73,7 +74,7 @@ const SurveyForm = () => {
     initialValues: initialValues,
     onSubmit: (values) => {
       console.log(values)
-      axios.post('http://localhost:3002/form', values)
+      axios.post(`${backend_base_url}/form`, values)
       .then((res) => {
         toast({ title: res.data.message });
         setShowModal(true);
