@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
 import Resume from './resume'; 
-import { backend_base_url } from "@/lib/constants";
+import { backend_base_url } from "@/components/lib/constants";
 
 const SurveyForm = () => {
   const[formData, setFormData] = useState([])
