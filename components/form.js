@@ -285,6 +285,7 @@ const SurveyForm = () => {
                           onChange={formik.handleChange}
                           checked={skill.proficiency === String(value)}
                           className="h-5 w-5 hover:cursor-pointer"
+                          required
                         />
                       <label >{value}</label>
                       </div>
@@ -320,6 +321,7 @@ const SurveyForm = () => {
                           onChange={formik.handleChange}
                           checked={skill.proficiency === String(value)}
                           className="h-5 w-5 hover:cursor-pointer"
+                          required
                         />
                       <label >{value}</label>
                       </div>
@@ -355,6 +357,7 @@ const SurveyForm = () => {
                           onChange={formik.handleChange}
                           checked={skill.proficiency === String(value)}
                           className="h-5 w-5 hover:cursor-pointer"
+                          required
                         />
                       <label >{value}</label>
                       </div>
@@ -390,6 +393,7 @@ const SurveyForm = () => {
                           onChange={formik.handleChange}
                           checked={skill.proficiency === String(value)}
                           className="h-5 w-5 hover:cursor-pointer"
+                          required
                         />
                       <label >{value}</label>
                       </div>
@@ -425,6 +429,7 @@ const SurveyForm = () => {
                           onChange={formik.handleChange}
                           checked={skill.proficiency === String(value)}
                           className="h-5 w-5 hover:cursor-pointer"
+                          required
                         />
                       <label >{value}</label>
                       </div>
