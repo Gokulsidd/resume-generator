@@ -17,15 +17,16 @@ const SurveyForm = () => {
   const [showModal, setShowModal] = useState(false);
   const { toast } = useToast()
 
-  useEffect(() => {
-    axios.get('http://localhost:3002/form')
-    .then((res) => {
-      setFormData(res.data[0])
-    })
-    .catch ((error) => {
-      console.log(error)
-    })
-  },[])
+
+  // useEffect(() => {                               //  for prefill form data 
+  //   axios.get('http://localhost:3002/form')
+  //   .then((res) => {
+  //     setFormData(res.data[0])
+  //   })
+  //   .catch ((error) => {
+  //     console.log(error)
+  //   })
+  // },[])
 
 
  
