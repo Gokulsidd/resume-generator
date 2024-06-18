@@ -62,7 +62,7 @@
 
 #resume p.info {
     height: fit-content;
-    width: 550px;
+    width: 100%; /* Use full width on smaller screens */
 }
 
 #resume .label {
@@ -72,8 +72,70 @@
 
 /* Responsive Styles */
 @media only screen and (max-width: 768px) {
+    #resume {
+        padding: 15px;
+    }
+
+    #resume h1 {
+        font-size: 24px;
+    }
+
+    #resume h2 {
+        font-size: 18px;
+    }
+
+    #resume h3 {
+        font-size: 16px;
+    }
+
+    #resume p {
+        font-size: 14px;
+    }
+
+    #resume .section-title {
+        font-size: 22px;
+    }
+
+    #resume .sub-section {
+        margin-left: 10px;
+    }
+
     #resume p.info {
         font-size: 14px;
         line-height: 1.5;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #resume {
+        padding: 10px;
+    }
+
+    #resume h1 {
+        font-size: 20px;
+    }
+
+    #resume h2 {
+        font-size: 16px;
+    }
+
+    #resume h3 {
+        font-size: 14px;
+    }
+
+    #resume p {
+        font-size: 12px;
+    }
+
+    #resume .section-title {
+        font-size: 18px;
+    }
+
+    #resume .sub-section {
+        margin-left: 5px;
+    }
+
+    #resume p.info {
+        font-size: 12px;
     }
 }
