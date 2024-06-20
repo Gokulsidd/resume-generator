@@ -37,6 +37,21 @@ const Resume = ({ data }) => {
             </div>
 
             <div className="section">
+                <h2 className="section-title">Projects</h2>
+                {data.projects.map((project, index) => (
+                    <div key={index} className="sub-section">
+                        <h3>{project.projectName}</h3>
+                        <p><span className="label">description:</span> {project.description}</p>
+                        <p><span className="label">Duration:</span> {project.duration}</p>
+                        <p><span className="label">technologies:</span> {project.technologies}</p>
+                        <p><span className="label">rolesAndResponsibilities:</span> {project.rolesAndResponsibilities}</p>
+                        <p><span className="label">githubRepoLink:</span> {project.githubRepoLink}</p>
+                        <hr />
+                    </div>
+                ))}
+            </div>
+
+            <div className="section">
                 <h2 className="section-title">Skills</h2>
                 <div className="sub-section">
                     <h3>Backend Languages</h3>

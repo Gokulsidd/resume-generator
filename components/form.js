@@ -56,6 +56,16 @@ const SurveyForm = () => {
         yearOfGraduation: "",
       },
     ],
+    projects: formData.projects || [
+      {
+        projectName: "",
+        description: "",
+        duration: "",
+        technologies: "",
+        rolesAndResponsibilities: "",
+        githubRepoLink: ""
+      },
+    ],
     skills: formData.skills || {
       backendLanguages: [{ name: "", proficiency: "" }],
       frontendLanguages: [{ name: "", proficiency: "" }],
@@ -107,6 +117,19 @@ const SurveyForm = () => {
       formik.setFieldValue("education", [...formik.values.education, newEducation])
   }
 
+  const addProject = () => {
+    const newProject = {
+      projectName: "",
+      description: "",
+      duration: "",
+      technologies: "",
+      rolesAndResponsibilities: "",
+      githubRepoLink: ""
+    }
+    
+      formik.setFieldValue("projects", [...formik.values.projects, newProject])
+  }
+
   const addBackendSkill = () => {
     formik.setFieldValue("skills.backendLanguages", [
       ...formik.values.skills?.backendLanguages,
@@ -144,18 +167,36 @@ const SurveyForm = () => {
 
   const handleGeneratePdf = () => {
     const input = document.getElementById('resume');
-    html2canvas(input).then((canvas) => {
+    html2canvas(input, { allowTaint: true, useCORS: true }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight()
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      let heightLeft = imgProps.height;
+      let position = 0;
+  
+      // Add the first page
+      const firstPageHeight = Math.min(heightLeft, pdfHeight);
+      const firstPageWidth = (firstPageHeight * imgProps.width) / imgProps.height;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, firstPageHeight);
+      heightLeft -= firstPageHeight;
+      position -= firstPageHeight;
+  
+      // Add remaining pages
+      // while (heightLeft > 0) {
+      //   pdf.addPage();
+      //   const pageHeight = Math.min(heightLeft, pdfHeight);
+      //   const pageWidth = (pageHeight * imgProps.width) / imgProps.height;
+      //   pdf.addImage(imgData, 'PNG', 0, position, pageWidth, pageHeight);
+      //   heightLeft -= pageHeight;
+      //   position -= pageHeight;
+      // }
+  
       pdf.save(`${formik.values.fullName}-resume.pdf`);
-      setShowModal(false)
+      setShowModal(false);
     });
   };
-
 
   
 
@@ -259,6 +300,43 @@ const SurveyForm = () => {
             </div>
             ))}
             <Button variant="default" size="lg" className="w-full" type="button" onClick={addEducation}>+ Add Education</Button>
+          </div>
+          <div className="p-6 flex flex-col gap-y-5 md:border border-gray-200 rounded-md md:shadow-md">
+            <h1 className="text-[#444444] font-semibold text-[1.4rem]">
+              Projects
+            </h1>
+            {formik.values.projects?.map((project, index) => (
+                <div className="flex flex-col gap-y-5" key={index}>
+                <h1 className="text-[#444444] font-semibold text-[1rem]">
+                Projects {index + 1}
+                </h1>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Project Name </Label>
+                    <Input id={`projectName-${index}`} type="text" name={`projects[${index}].projectName`} onChange={formik.handleChange} value={project.institutionName} />
+                </div>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Description</Label>
+                    <Input id={`description-${index}`} type="text" name={`projects[${index}].description`} onChange={formik.handleChange} value={project.degree} />
+                </div>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Duration </Label>
+                    <Input id={`duration-${index}`} type="text" name={`projects[${index}].duration`} onChange={formik.handleChange} value={project.major} />
+                </div>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Technology</Label>
+                    <Input id={`technologies-${index}`} type="text" name={`projects[${index}].technologies`} onChange={formik.handleChange} value={project.yearOfGraduation} />
+                </div>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Roles and Responsibilities</Label>
+                    <Input id={`rolesAndResponsibilities-${index}`} type="text" name={`projects[${index}].rolesAndResponsibilities`} onChange={formik.handleChange} value={project.yearOfGraduation} />
+                </div>
+                <div className="flex flex-col gap-y-1">
+                    <Label>Github Code Link</Label>
+                    <Input id={`githubRepoLink-${index}`} type="text" name={`projects[${index}].githubRepoLink`} onChange={formik.handleChange} value={project.githubRepoLink} />
+                </div>
+            </div>
+            ))}
+            <Button variant="default" size="lg" className="w-full" type="button" onClick={addProject}>+ Add Project</Button>
           </div>
           <div className="p-6 flex flex-col gap-y-5 md:border border-gray-200 rounded-md md:shadow-md">
             <h1 className="text-[#444444] font-semibold text-[1.4rem]">Skills</h1>
