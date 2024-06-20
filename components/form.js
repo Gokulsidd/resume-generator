@@ -214,7 +214,7 @@ const SurveyForm = () => {
             </div>
             <div className="flex flex-col gap-y-1">
                 <Label>Email Address</Label>
-                <Input id="emailAddress" type="email" name="emailAddress" onChange={formik.handleChange} value={formik.values.email} />
+                <Input id="email" type="email" name="email" onChange={formik.handleChange} value={formik.values.email} />
             </div>
             <div className="flex flex-col gap-y-1">
                 <Label>Phone Number</Label>
