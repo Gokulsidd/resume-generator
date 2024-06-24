@@ -1,34 +1,46 @@
 import random
 
-def rockPaperScissor():
-    options = ['rock', 'paper', 'scissor']
-    play = True
+alphabets = [chr(i) for i in range(65,91)] + [chr(i) for i in range(97, 123)]
+numbers = [str(i) for i in range(0,10)]
+symbols = ['!','#', '$', '%', '&', '*', '+', '?', '@']
+
+def generatePassword(char, number, symbol):
+    random_values = []
+    for i in range(0, char):
+        random_values.append(random.choice(alphabets))
+    for i in range(0, symbol):
+        random_values.append(random.choice(symbols))
+    for i in range(0, number):
+        random_values.append(random.choice(numbers))
     
-    while play:
-        user_input = input('0 for rock , 1 for paper , 2 for scissor or Enter Space to end the game\nyour choice: ')
-        print(type(user_input) == '0')
+    random.shuffle(random_values)
+    shuffled_values = ''
+    
+    for char in random_values:
+        shuffled_values += char 
+    
+    return shuffled_values
+    
         
-                
-        if user_input == " ":
-            play = False
-            print("End Game")
-        elif user_input != '0' or user_input != '1' or user_input != '2':
-            print('Invalid Input . Enter number between 0 to 2')
-        else:
-            computer_choice = random.choice(options)
-            user_choice = options[int(user_input)]
+    
+
+def passwordGenerator():
+    chars = int(input('Enter how many characters you want in your password: '))
+    numbers = int(input('Enter how many numbers you want in your password: '))
+    symbols = int(input('Enter how many symbols you want in your password: '))
+    regenerate = True
+    
+    
+    while regenerate:
+        password = generatePassword(chars, numbers, symbols)
+        print(f"this is the generated password: {password}\n")
+        try_again = input("Do you want to try again? Y or N :")
+        
+        if try_again.lower() == 'n':
+            regenerate = False
             
-            if (computer_choice == 'rock' and user_choice == 'paper') or (computer_choice == 'paper' and user_choice == 'scissor') or (computer_choice == 'scissor' and user_choice == 'rock'):
-                print(f'computer: {computer_choice}\nyou: {user_choice}\n\nYou Win !!')
-            elif computer_choice == user_choice:
-                print(f'computer: {computer_choice}\nyou: {user_choice}\n\nIts a Tie !!')
-            else:
-                print(f'computer: {computer_choice}\nyou: {user_choice}\n\nYou lose !!')
-
-rockPaperScissor()
-
-        
-
-
-
+passwordGenerator()
     
+
+
+

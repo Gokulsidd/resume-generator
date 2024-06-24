@@ -1,4 +1,4 @@
-import SurveyForm from "@/components/form";
+import SurveyForm from "@/components/form/form";
 
 export default function Home() {
   return (
