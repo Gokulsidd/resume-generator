@@ -954,7 +954,7 @@ const SurveyForm = () => {
               />
             </div>
           </div>
-          <div className="p-6 flex flex-col gap-x-1 md:flex-row gap-y-2 w-full">
+          <div className="w-full gap-y-2 px-6 md:px-0">
             <Button type="submit" className="w-full">
               Submit
             </Button>
