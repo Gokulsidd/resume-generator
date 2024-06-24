@@ -596,7 +596,7 @@ const SurveyForm = () => {
                       value={skill.name}
                     />
                   </div>
-                  <div className="flex flex-row md:gap-x-6 gap-x-3 items-center justify-around">
+                  <div className="flex flex-row md:gap-x-6 gap-x-3 pl-1 items-center justify-around">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <div key={value} className="flex items-center gap-x-1">
                         <input
@@ -658,7 +658,7 @@ const SurveyForm = () => {
                       value={skill.name}
                     />
                   </div>
-                  <div className="flex flex-row md:gap-x-6 gap-x-3 items-center justify-around">
+                  <div className="flex flex-row md:gap-x-6 gap-x-3 pl-1 items-center justify-around">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <div key={value} className="flex items-center gap-x-1">
                         <input
@@ -720,7 +720,7 @@ const SurveyForm = () => {
                       value={skill.name}
                     />
                   </div>
-                  <div className="flex flex-row md:gap-x-6 gap-x-3 items-center justify-around">
+                  <div className="flex flex-row md:gap-x-6 gap-x-3 pl-1 items-center justify-around">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <div key={value} className="flex items-center gap-x-1">
                         <input
@@ -782,7 +782,7 @@ const SurveyForm = () => {
                       value={skill.name}
                     />
                   </div>
-                  <div className="flex flex-row md:gap-x-6 gap-x-3 items-center justify-around">
+                  <div className="flex flex-row md:gap-x-6 gap-x-3 pl-1 items-center justify-around">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <div key={value} className="flex items-center gap-x-1">
                         <input
@@ -844,7 +844,7 @@ const SurveyForm = () => {
                       value={skill.name}
                     />
                   </div>
-                  <div className="flex flex-row md:gap-x-6 gap-x-3 items-center justify-around">
+                  <div className="flex flex-row md:gap-x-6 gap-x-3 pl-1 items-center justify-around">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <div key={value} className="flex items-center gap-x-1">
                         <input
@@ -954,7 +954,7 @@ const SurveyForm = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-x-1 md:flex-row gap-y-2 w-full">
+          <div className="p-6 flex flex-col gap-x-1 md:flex-row gap-y-2 w-full">
             <Button type="submit" className="w-full">
               Submit
             </Button>
