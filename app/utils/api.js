@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3002', // Your NestJS backend URL
+  baseURL: 'https://resume-generator-backend-hwmi.onrender.com', 
   headers: {
     'Content-Type': 'application/json',
   },
