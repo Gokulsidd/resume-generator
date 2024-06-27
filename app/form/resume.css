@@ -1,4 +1,3 @@
-/* Resume.css */
 #resume {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     max-width: 1000px;
@@ -8,7 +7,6 @@
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
 #resume h1 {
@@ -59,12 +57,20 @@
 #resume .info {
     margin-bottom: 0.25em;
     color: #888;
-    width: 100%; /* Use full width on smaller screens */
 }
 
 #resume .label {
     font-weight: bold;
     color: #333;
+}
+
+#resume a {
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+#resume a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Styles */

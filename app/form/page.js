@@ -5,30 +5,43 @@ import axios from "axios";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Toaster } from "../ui/toaster";
-import { useToast } from "../ui/use-toast";
+import { Button } from "../../components/ui/button";
+import { Label } from "../../components/ui/label";
+import { Input } from "../../components/ui/input";
+import { Toaster } from "../../components/ui/toaster";
+import { useToast } from "../../components/ui/use-toast";
 import Resume from "./resume";
 import { backend_base_url } from "@/lib/constants";
-import DeleteButton from "../delete_button";
 import Image from "next/image";
+import api from "../utils/api";
+import { useAuth } from "../contexts/AuthContext";
+import { fetchDataById } from "@/lib/helper";
+import { usePathname } from "next/navigation";
 
 const SurveyForm = () => {
+  const { user } = useAuth()
   const [formData, setFormData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const path = usePathname()
 
-  // useEffect(() => {                               //  for prefill form data
-  //   axios.get(`${backend_base_url}/form`)
-  //   .then((res) => {
-  //     setFormData(res.data[0])
-  //   })
-  //   .catch ((error) => {
-  //     console.log(error)
-  //   })
-  // },[])
+  useEffect(() => {
+    const getCandidate = async () => {
+      setLoading(true);
+      const res = await fetchDataById("/form/email/", user.email);
+      setFormData(res) 
+      setLoading(false);
+      console.log(res);
+    };
+
+    
+    if (path != '/dashboard/candidates/create' ) {
+      getCandidate()
+    }
+
+    
+  }, [user.email]);
 
   const initialValues = {
     fullName: formData.fullName || "",
@@ -230,7 +243,7 @@ const SurveyForm = () => {
   }
 
   return (
-    <div className="w-full md:w-[650px] md:mdp-2">
+    <div className="w-full md:w-[650px] md:p-2 mx-auto">
       <div>
         <form
           onSubmit={formik.handleSubmit}
