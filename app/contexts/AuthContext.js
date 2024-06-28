@@ -52,9 +52,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (email, password) => {
+  const register = async (username,email, password) => {
     try {
-      const response = await api.post('/auth/register', { email, password });
+      const response = await api.post('/auth/register', { username, email, password });
+      const { access_token, user, role } = response.data;
+      Cookies.set('token', access_token, { expires: 1 });
+      api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+
+      if (access_token) {
+        router.push('/auth/login');
+      }
+    } catch (error) {
+      console.error('Registration failed', error);
+      throw error;
+    }
+  };
+
+  const registerAdmin = async (username,email, password) => {
+    try {
+      const response = await api.post('/auth/register-admin', { username, email, password });
       const { access_token, user, role } = response.data;
       Cookies.set('token', access_token, { expires: 1 });
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
@@ -80,7 +96,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, register,registerAdmin, logout }}>
       {children}
     </AuthContext.Provider>
   );

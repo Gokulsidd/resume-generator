@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function Register() {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register } = useAuth();
@@ -11,10 +12,9 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(email, password);
+      await register(username,email, password);
     } catch (error) {
       console.error('Registration failed', error);
-      // Handle error (e.g., show error message)
     }
   };
 
@@ -22,6 +22,13 @@ export default function Register() {
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
+      <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+          required
+        />
         <input
           type="email"
           value={email}

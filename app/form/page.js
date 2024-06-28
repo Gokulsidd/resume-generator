@@ -96,7 +96,7 @@ const SurveyForm = () => {
     initialValues: initialValues,
     onSubmit: (values) => {
       console.log(values);
-      axios.post(`${backend_base_url}/form`, values).then((res) => {
+      api.post('/form', values).then((res) => {
         toast({ title: res.data.message });
         setShowModal(true);
       });
@@ -506,7 +506,7 @@ const SurveyForm = () => {
                     type="text"
                     name={`projects[${index}].projectName`}
                     onChange={formik.handleChange}
-                    value={project.institutionName}
+                    value={project.projectName}
                   />
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -516,7 +516,7 @@ const SurveyForm = () => {
                     type="text"
                     name={`projects[${index}].description`}
                     onChange={formik.handleChange}
-                    value={project.degree}
+                    value={project.description}
                   />
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -526,7 +526,7 @@ const SurveyForm = () => {
                     type="text"
                     name={`projects[${index}].duration`}
                     onChange={formik.handleChange}
-                    value={project.major}
+                    value={project.duration}
                   />
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -536,7 +536,7 @@ const SurveyForm = () => {
                     type="text"
                     name={`projects[${index}].technologies`}
                     onChange={formik.handleChange}
-                    value={project.yearOfGraduation}
+                    value={project.technologies}
                   />
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -546,7 +546,7 @@ const SurveyForm = () => {
                     type="text"
                     name={`projects[${index}].rolesAndResponsibilities`}
                     onChange={formik.handleChange}
-                    value={project.yearOfGraduation}
+                    value={project.rolesAndResponsibilities}
                   />
                 </div>
                 <div className="flex flex-col gap-y-1">

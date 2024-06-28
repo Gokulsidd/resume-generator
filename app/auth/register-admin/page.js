@@ -1,34 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import api from '../../utils/api';
 
-export default function RegisterAdmin() {
+const RegisterAdmin = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { user } = useAuth();
   const router = useRouter();
 
-  // Redirect if not admin
-  // if (user && user.role !== 'admin') {
-  //   router.push('/dashboard');
-  //   return null;
-  // }
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/login");
+    }
+
+    if (user.role != "admin") {
+      router.push("/unauthorized");
+    }
+  }, [user, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/auth/register-admin', { username, email, password });
-      alert('Admin registered successfully');
-      setEmail('');
-      setPassword('');
-      router.push('/dashboard')
+      await registerAdmin(username,email, password);
     } catch (error) {
-      console.error('Admin registration failed', error);
-      alert('Failed to register admin: ' + error.response?.data?.message || error.message);
+      console.error('Registration failed', error);
     }
   };
 
@@ -62,3 +60,6 @@ export default function RegisterAdmin() {
     </div>
   );
 }
+
+
+export default RegisterAdmin

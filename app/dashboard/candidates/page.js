@@ -22,6 +22,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { fetchData } from "@/lib/helper";
 import Link from "next/link";
+import api from "@/app/utils/api";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+
 
 const Font = Poppins({
   subsets: ["latin"],
@@ -32,6 +36,7 @@ const Candidates = () => {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
   const [data, setData] = useState([]);
+  const toast = useToast()
 
   useEffect(() => {
     const getData = async () => {
@@ -45,6 +50,15 @@ const Candidates = () => {
   const handleAddCandidate = () => {
     router.push("dashboard/candidates/create");
   };
+
+  const handleDeleteCandidate = async (id, name) => {
+    try{
+      api.delete('/form/'+id)
+      toast({ title: `Deleted ${name}'s data`,  variant: "destructive",})
+    }catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
@@ -135,7 +149,7 @@ const Candidates = () => {
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => handleDeleteClick(item._id)}
+                        onClick={() => handleDeleteCandidate(item._id, item.fullName)}
                       >
                         Delete
                       </Button>
@@ -146,6 +160,7 @@ const Candidates = () => {
             })}
           </TableBody>
         </Table>
+        <Toaster />
       </div>
     </div>
   );

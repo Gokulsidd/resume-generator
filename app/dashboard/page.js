@@ -19,7 +19,7 @@ export default function Dashboard() {
     }
 
     if (user.role != "admin") {
-      router.push("/error");
+      router.push("/unauthorized");
     }
   }, [user, router]);
 
